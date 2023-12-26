@@ -7,13 +7,22 @@ import { Users } from "./types";
 
 const locations: SharedLocation[] = [
   {
-    name: "7 Eleven Grand Prairie",
-    latitude: 32.79834,
-    longitude: -97.01931,
-    instagram_username: Users.splitMedia,
-    city: "Grand Prairie",
+    name: "Tree Tunnel",
+    latitude: 33.19446,
+    longitude: -96.94256,
+    instagram_username: Users.lundPhotos,
+    city: "Little Elm",
     security: Security.none,
-    tags: [Tags.gasStation, Tags.night, Tags.clean],
+    tags: [Tags.day, Tags.group, Tags.clean],
+  },
+  {
+    name: "Legacy West Garage 2",
+    latitude: 33.08128,
+    longitude: -96.82537,
+    instagram_username: Users.lundPhotos,
+    city: "Plano",
+    security: Security.low,
+    tags: [Tags.night, Tags.group, Tags.clean],
   },
   {
     name: "Industrial Machinery",

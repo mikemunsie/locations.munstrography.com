@@ -12,4 +12,5 @@ export const Users = {
   mayitoShoots: "mayitoshoots",
   snowzilla: "snowzilla",
   rakkzo: "rakkzo",
+  lundPhotos: "lund.photos"
 };
