@@ -7,7 +7,7 @@ git push --tags
 PACKAGE_VERSION=`jq -r .version package.json`
 
 npm run build
-echo "{\"version\": \"${PACKAGE_VERSION}\" }" > ./dist/version.json
-aws s3 rm --recursive s3://locations.munstrography.com
-aws s3 sync ./dist s3://locations.munstrography.com
-aws s3 cp s3://locations.munstrography.com/index.html s3://locations.munstrography.com/index.html --metadata-directive REPLACE --cache-control max-age=0 --content-type "text/html"
+echo "{\"version\": \"${PACKAGE_VERSION}\" }" > ./dist/version.json --debug
+aws s3 rm --recursive s3://locations.munstrography.com --debug
+aws s3 sync ./dist s3://locations.munstrography.com --debug
+aws s3 cp s3://locations.munstrography.com/index.html s3://locations.munstrography.com/index.html --metadata-directive REPLACE --cache-control max-age=0 --content-type "text/html" 
