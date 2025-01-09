@@ -49,7 +49,14 @@
     <div style="text-align: left; padding: 15px; padding-bottom: 7.5px">
       <p><i>Just a moment as we request permissions...</i></p>
     </div>
-    <div style="text-align: left; padding-left: 15px; font-size: 12px">
+    <div
+      style="
+        text-align: left;
+        padding-left: 15px;
+        padding-right: 15px;
+        font-size: 12px;
+      "
+    >
       <p>
         <i
           >If this doesn't work, don't panic, I'll just place you in the middle
