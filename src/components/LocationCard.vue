@@ -52,6 +52,9 @@ const props = defineProps<{
 }>();
 
 function getDirections() {
+  window.gtag("event", "directions", {
+    location: props.location.name,
+  });
   window.location.href = getGoogleMapDirections(props.location);
 }
 
