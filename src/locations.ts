@@ -7,6 +7,15 @@ import { Users } from "./types";
 
 const locations: SharedLocation[] = [
   {
+    name: "Gulf Gas Station",
+    latitude: 33.624488,
+    longitude: -97.1411259,
+    instagram_username: "christianpizzarelli",
+    city: "Gainesville",
+    security: Security.none,
+    tags: [Tags.day, Tags.night, Tags.group, Tags.gasStation],
+  },
+  {
     name: "Collin College Stem Campus",
     latitude: 33.12788,
     longitude: -96.71334,
