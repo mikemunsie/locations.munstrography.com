@@ -9,6 +9,12 @@ export const userCoords = ref({
   longitude: 0,
 });
 
+export function use_default_coords() {
+  userCoords.value.latitude = 32.7859214;
+  userCoords.value.longitude = -97.0589091;
+  geoLocationStatus.value = "success";
+}
+
 export function updateUserLocation(): Promise<Ref<LocationCoords>> {
   geoLocationStatus.value = "loading";
   return new Promise((resolve, reject) => {

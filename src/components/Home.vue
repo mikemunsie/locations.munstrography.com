@@ -77,12 +77,24 @@
         some other app? Try opening this link in a browser. If that doesn't
         work, look into adjusting your security settings.
       </p>
-      <button
-        @click="onCopySite"
-        class="mb-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      >
-        Copy link to site
-      </button>
+      <div style="text-align: center">
+        <button
+          @click="onCopySite"
+          style="width: 100%"
+          class="mb-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Copy link to site
+        </button>
+        <div class="mb-3">Or</div>
+
+        <button
+          @click="onUseWithoutGPS"
+          style="width: 100%"
+          class="mb-5 bg-fuchsia-300 hover:bg-fuchsia-400 text-black font-bold py-2 px-4 rounded"
+        >
+          Continue to use without GPS
+        </button>
+      </div>
       <div v-if="isSafari">
         <p><strong>For safari:</strong></p>
         <ul class="mb-3" style="text-align: left">
@@ -90,7 +102,7 @@
           <li>Goto Location Services.</li>
           <li>Goto Safari Websites and allow location access.</li>
         </ul>
-        <img :src="`${publicPath}/safari_help.jpg`" />
+        <img :src="`/safari_help.jpg`" />
       </div>
     </div>
   </div>
@@ -128,6 +140,7 @@ import { getLocationsByDistance } from "../utils/sharedLocation";
 import {
   geoLocationStatus,
   updateUserLocation,
+  use_default_coords,
   userCoords,
 } from "../utils/userCoords";
 import Header from "./Header.vue";
@@ -155,6 +168,11 @@ async function init() {
   await updateUserLocation();
   locationsByDistance.value = await getLocationsByDistance(userCoords.value);
   window.scrollTo(0, 0);
+}
+
+async function onUseWithoutGPS() {
+  use_default_coords();
+  locationsByDistance.value = await getLocationsByDistance(userCoords.value);
 }
 
 function submit_spot() {
