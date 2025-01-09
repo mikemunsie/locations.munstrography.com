@@ -1,7 +1,7 @@
 {
   "name": "location-sharing",
   "repository": "git@github.com:mikemunsie/location-sharing.git",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "type": "module",
   "scripts": {
     "deploy": "./deploy.sh",
