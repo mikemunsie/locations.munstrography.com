@@ -1,6 +1,10 @@
 <template>
   <div v-if="geoLocationStatus === 'none'">
-    <h1>DFW Car Spots</h1>
+    <img
+      src="/logo.png"
+      style="max-width: 200px; margin: auto; margin-top: 30px"
+      class="img"
+    />
     <div style="text-align: left; padding: 15px">
       <p>
         Ready to find some neat locations for car photography in the DFW area?
