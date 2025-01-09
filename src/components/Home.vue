@@ -9,10 +9,20 @@
       <div class="text-center">
         <button
           @click="init"
-          class="mt-7 mb-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          class="mt-7 mb-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           style="width: 100%"
         >
           Let's Begin!
+        </button>
+      </div>
+      <div class="text-center">or</div>
+      <div class="text-center">
+        <button
+          @click="submit_spot"
+          class="mt-3 mb-5 bg-fuchsia-300 hover:bg-fuchsia-400 text-black font-bold py-2 px-4 rounded"
+          style="width: 100%"
+        >
+          Submit a Spot
         </button>
       </div>
       <p style="margin-top: 7.5px; margin-bottom: 15px; font-size: 12px">
@@ -134,6 +144,10 @@ async function init() {
   await updateUserLocation();
   locationsByDistance.value = await getLocationsByDistance(userCoords.value);
   window.scrollTo(0, 0);
+}
+
+function submit_spot() {
+  window.location.href = "https://instagram.com/munstrography";
 }
 
 const filteredLocations = computed(() => {
