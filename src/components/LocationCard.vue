@@ -115,7 +115,7 @@ function friendlySecurityName(securityName: string) {
     margin: auto;
     margin-bottom: 7.5px;
     width: 100%;
-    height: 50vh;
+    height: 50dvh;
     object-fit: cover;
     object-position: center;
   }
