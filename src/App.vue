@@ -8,6 +8,7 @@
 
 <style lang="scss">
 :root {
+  --image-height: 50vh;
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-weight: 400;
@@ -54,3 +55,20 @@ h1 {
   padding: 2em;
 }
 </style>
+
+<script lang="ts" setup>
+const element = document.documentElement; // or any specific element
+
+function recalculate_image_height() {
+  let height = Math.floor(window.innerHeight / 2);
+  if (height < 300) height = 300;
+  element.style.setProperty("--image-height", `${height}px`);
+}
+
+recalculate_image_height();
+
+window.onresize = () => {
+  if (window.innerWidth < 600) return;
+  recalculate_image_height();
+};
+</script>
