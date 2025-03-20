@@ -21,10 +21,12 @@
         </button>
       </div>
     </div>
-    <div
+    <img
       class="img"
-      :style="`background-image: url('${publicPath}locations/${location.name}.jpg')`"
+      loading="lazy"
+      :src="`${publicPath}locations/${location.name}.jpg`"
     />
+
     <div class="flex items-center">
       <div class="tags">
         <strong>Tags:</strong> {{ location.tags.join(", ") }}
@@ -55,7 +57,7 @@ function getDirections() {
   window.gtag("event", "directions", {
     location: props.location.name,
   });
-  window.location.href = getGoogleMapDirections(props.location);
+  window.open(getGoogleMapDirections(props.location), "_blank");
 }
 
 function friendlySecurityName(securityName: string) {
@@ -114,8 +116,8 @@ function friendlySecurityName(securityName: string) {
     margin-bottom: 7.5px;
     width: 100%;
     height: 50vh;
-    background-position: center;
-    background-size: cover;
+    object-fit: cover;
+    object-position: center;
   }
 }
 </style>

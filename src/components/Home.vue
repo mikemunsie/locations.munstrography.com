@@ -183,6 +183,9 @@ const filteredLocations = computed(() => {
   if (!filterValues.value.length) return locationsByDistance.value;
   return locationsByDistance.value.filter((sharedLocation) => {
     return filterValues.value.every((filter) => {
+      if (filter.indexOf("user:") > -1) {
+        return sharedLocation.instagram_username === filter.slice(5);
+      }
       return sharedLocation.tags.includes(filter);
     });
   });
