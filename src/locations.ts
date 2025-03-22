@@ -503,6 +503,15 @@ const locations: SharedLocation[] = [
     security: Security.none,
     tags: [Tags.day, Tags.clean],
   },
+  {
+    name: "Cyber Building",
+    latitude: 32.8989919,
+    longitude: -96.9597708,
+    instagram_username: Users.munstrography,
+    city: "Irving",
+    security: Security.none,
+    tags: [Tags.night, Tags.cyberpunk],
+  },
 ];
 
 export { locations };

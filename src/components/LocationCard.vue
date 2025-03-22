@@ -11,10 +11,24 @@
         </div>
         <div class="distance">{{ location.distance }} miles away</div>
       </div>
-      <div class="ml-auto">
+      <div class="ml-auto flex items-center">
+        <button
+          class="share mr-4 rounded"
+          :class="{ 'has-shared': has_shared }"
+          @click="handle_share"
+        >
+          <span
+            class="fa fa-regular mr-2"
+            :class="{
+              'fa-clipboard': !has_shared,
+              'fa-solid fa-check': has_shared,
+            }"
+          ></span>
+          <span>copy location</span>
+        </button>
         <button
           @click="getDirections"
-          class="bg-blue-500 text-white active:bg-pink-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+          class="directions bg-blue-500 text-white rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
           type="button"
         >
           Directions
@@ -44,14 +58,30 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
+
 import { SharedLocationWithDistance } from "@/models/location";
-import { getGoogleMapDirections } from "../utils/googleMaps";
+import { getGoogleMapDirections, getGoogleMapShare } from "../utils/googleMaps";
 
 const publicPath = import.meta.env.BASE_URL;
 
 const props = defineProps<{
   location: SharedLocationWithDistance;
 }>();
+
+const has_shared = ref(false);
+
+function handle_share() {
+  try {
+    navigator.clipboard.writeText(getGoogleMapShare(props.location));
+    has_shared.value = true;
+    setTimeout(() => {
+      has_shared.value = false;
+    }, 1000);
+  } catch (e) {
+    alert("Couldn't copy to clipboard. Try clicking directions instead.");
+  }
+}
 
 function getDirections() {
   window.gtag("event", "directions", {
@@ -76,6 +106,25 @@ function friendlySecurityName(securityName: string) {
   padding: 15px;
   margin-bottom: 15px;
   text-align: left;
+  .directions {
+    font-size: 12px;
+    height: 30px;
+    padding: 0 10px;
+    font-weight: bold;
+  }
+  .share {
+    border: 1px solid #ccc;
+    height: 30px;
+    padding: 0 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    &.has-shared {
+      background: limegreen;
+      border: 1px solid limegreen;
+    }
+  }
   .tags {
     font-size: 10px;
   }
