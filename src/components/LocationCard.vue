@@ -18,13 +18,12 @@
           @click="handle_share"
         >
           <span
-            class="fa fa-regular mr-2"
+            class="fa fa-regular"
             :class="{
-              'fa-clipboard': !has_shared,
+              'fa-copy': !has_shared,
               'fa-solid fa-check': has_shared,
             }"
           ></span>
-          <span>copy location</span>
         </button>
         <button
           @click="getDirections"
