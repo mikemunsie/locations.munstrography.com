@@ -515,11 +515,29 @@ const locations: SharedLocation[] = [
   {
     name: "Overhead Airplanes",
     latitude: 32.9242165,
-    longitude: -97.0289413,
+    longitude: -97.0263664,
     instagram_username: Users.munstrography,
     city: "Irving",
     security: Security.none,
     tags: [Tags.day, Tags.clean],
+  },
+  {
+    name: "Dallas Dart Trails",
+    latitude: 32.7706282,
+    longitude: -96.8076252,
+    instagram_username: Users.munstrography,
+    city: "Dallas",
+    security: Security.none,
+    tags: [Tags.night],
+  },
+  {
+    name: "Dallas Skyline",
+    latitude: 32.7706282,
+    longitude: -96.8076252,
+    instagram_username: Users.munstrography,
+    city: "Dallas",
+    security: Security.none,
+    tags: [Tags.night],
   },
 ];
 
