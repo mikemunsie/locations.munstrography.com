@@ -514,8 +514,8 @@ const locations: SharedLocation[] = [
   },
   {
     name: "Overhead Airplanes",
-    latitude: 32.9242165,
-    longitude: -97.0263664,
+    latitude: 32.9241918,
+    longitude: -97.0264241,
     instagram_username: Users.munstrography,
     city: "Irving",
     security: Security.none,
