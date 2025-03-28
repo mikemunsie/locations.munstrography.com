@@ -134,8 +134,8 @@ const locations: SharedLocation[] = [
   },
   {
     name: "Corporate Tour",
-    latitude: 32.8630516,
-    longitude: -96.8111969,
+    latitude: 32.862937,
+    longitude: -96.809651,
     instagram_username: Users.dallasInBlack,
     city: "Dallas",
     security: Security.low,
