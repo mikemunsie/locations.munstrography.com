@@ -415,8 +415,8 @@ const locations: SharedLocation[] = [
   },
   {
     name: "Grandscape Garage",
-    latitude: 33.0743734,
-    longitude: -96.8635013,
+    latitude: 33.0719464,
+    longitude: -96.8619141,
     instagram_username: Users.brmPhotos,
     city: "The Colony",
     security: Security.low,
