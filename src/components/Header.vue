@@ -37,7 +37,7 @@ import { locations } from "@/locations";
 
 const emit = defineEmits(["update:filters"]);
 
-const filters = ref<string[]>([]);
+const filters = ref<any[]>([]);
 
 const tag_options = sortBy(
   Object.entries(Tags).map(([name, key]) => ({ 
