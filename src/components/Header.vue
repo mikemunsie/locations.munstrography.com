@@ -27,19 +27,24 @@
 
 <script setup lang="ts">
 import sortBy from "lodash/sortBy";
-import { ref, watchEffect } from "vue";
+import uniqBy from "lodash/uniqBy";
+import { ref, watchEffect, computed } from "vue";
 import Multiselect from "vue-multiselect";
 
 import { Tags } from "@/models/tag";
 import { Users } from "@/types";
+import { locations } from "@/locations";
 
 const emit = defineEmits(["update:filters"]);
 
 const filters = ref<string[]>([]);
 
 const tag_options = sortBy(
-  Object.entries(Tags).map(([name, key]) => ({ name, key })),
-  "name"
+  Object.entries(Tags).map(([name, key]) => ({ 
+    name: `tag: ${name}`,
+    key: `tag: ${name}`
+  })),
+  tag => tag.name.toLowerCase()
 );
 const user_options = sortBy(
   Object.keys(Users).map((user) => {
@@ -50,7 +55,28 @@ const user_options = sortBy(
   }),
   "name"
 );
-const options = [...tag_options, ...user_options];
+
+let city_options = sortBy(
+  locations.map((location) => {
+    return {
+      name: `city: ${location.city}`,
+      key:  `city: ${location.city}`
+    }
+  }),
+  location => location.name.toLowerCase().replace("the", "").replace("city:", "").trim()
+);
+city_options = uniqBy(city_options, "name");
+
+
+const options = computed(() => {
+  const options_raw = [...tag_options];
+  const filters_used = filters.value.map(filter => filter.key);
+  if (!filters_used.find(filter => filter.indexOf("city:") > -1)) {
+    options_raw.push(...city_options);
+  }
+  options_raw.push(...user_options);
+  return options_raw;
+})
 
 watchEffect(() => {
   emit("update:filters", filters.value);

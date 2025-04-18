@@ -9,7 +9,7 @@
         <div v-if="location.accessFee" class="distance">
           <strong>${{ location.accessFee }} access fee</strong>
         </div>
-        <div class="distance">{{ location.distance }} miles away</div>
+        <div class="distance">{{location.city}}: {{ location.distance }} miles away</div>
       </div>
       <div class="ml-auto flex items-center">
         <button
