@@ -539,6 +539,15 @@ const locations: SharedLocation[] = [
     security: Security.none,
     tags: [Tags.night],
   },
+  {
+    name: "Federal Street",
+    latitude: 32.7851238,
+    longitude: -96.7970912,
+    instagram_username: Users.itssoup,
+    city: "Dallas",
+    security: Security.none,
+    tags: [Tags.day, Tags.clean],
+  },
 ];
 
 export { locations };

@@ -65,7 +65,10 @@ function recalculate_image_height() {
   element.style.setProperty("--image-height", `${height}px`);
 }
 
-recalculate_image_height();
+setTimeout(() => {
+  recalculate_image_height();
+}, 1000);
+
 
 window.onresize = () => {
   if (window.innerWidth < 600) return;
