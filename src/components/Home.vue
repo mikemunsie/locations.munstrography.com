@@ -184,7 +184,8 @@ const filteredLocations = computed(() => {
   return locationsByDistance.value.filter((sharedLocation) => {
     return filterValues.value.every((filter) => {
       if (filter.indexOf("user:") > -1) {
-        return sharedLocation.instagram_username === filter.slice(6);
+        console.log(filter.slice(6))
+        return sharedLocation.instagram_username === filter.slice(5);
       }
       if (filter.indexOf("city:") > -1) {
         return sharedLocation.city === filter.slice(6);
