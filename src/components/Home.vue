@@ -13,7 +13,7 @@
       <div class="text-center">
         <button
           @click="init"
-          class="mt-7 mb-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          class="mt-7 mb-3 bg-blue-500 hover:bg-blue-400 text-black font-bold py-2 px-4 rounded"
           style="width: 100%"
         >
           Let's Begin!
@@ -23,7 +23,7 @@
       <div class="text-center">
         <button
           @click="submit_spot"
-          class="mt-3 mb-5 bg-fuchsia-300 hover:bg-fuchsia-400 text-black font-bold py-2 px-4 rounded"
+          class="mt-3 mb-5 bg-fuchsia-800 hover:bg-fuchsia-700 text-white font-bold py-2 px-4 rounded"
           style="width: 100%"
         >
           Submit a Spot
@@ -116,6 +116,8 @@
       :key="location.name"
       :filters="filters"
       :location="location"
+      @update_starting_location="handle_update_starting_location"
+      :starting_location="starting_location"
     />
   </div>
 </template>
@@ -134,6 +136,7 @@
 <script setup lang="ts">
 import { computed, Ref, ref, watchEffect } from "vue";
 import { copyText } from "vue3-clipboard";
+import { getDistance, convertDistance } from "geolib";
 
 import { SharedLocationWithDistance } from "@/models/location";
 import { getLocationsByDistance } from "../utils/sharedLocation";
@@ -145,6 +148,7 @@ import {
 } from "../utils/userCoords";
 import Header from "./Header.vue";
 import LocationCard from "./LocationCard.vue";
+import { sortBy } from "lodash";
 
 const publicPath = import.meta.env.BASE_URL;
 const filters = ref<{ name: string; key: string }[]>([]);
@@ -152,6 +156,14 @@ const locationsByDistance: Ref<SharedLocationWithDistance[]> = ref([]);
 const filterValues = computed(() => filters.value.map((filter) => filter.key));
 const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 const hasInit = ref(false);
+const starting_location = ref<SharedLocationWithDistance>();
+
+function handle_update_starting_location(location) {
+  starting_location.value = location;
+  setTimeout(() => {
+    window.scrollTo(0, 0);
+  }, 100)
+}
 
 function onCopySite() {
   copyText("https://locations.munstrography.com", undefined, (error) => {
@@ -180,11 +192,9 @@ function submit_spot() {
 }
 
 const filteredLocations = computed(() => {
-  if (!filterValues.value.length) return locationsByDistance.value;
-  return locationsByDistance.value.filter((sharedLocation) => {
+  const filtered_locations = locationsByDistance.value.filter((sharedLocation) => {
     return filterValues.value.every((filter) => {
       if (filter.indexOf("user:") > -1) {
-        console.log(filter.slice(6))
         return sharedLocation.instagram_username === filter.slice(5);
       }
       if (filter.indexOf("city:") > -1) {
@@ -192,11 +202,26 @@ const filteredLocations = computed(() => {
       }
       if (filter.indexOf("tag:") > -1) {
         return sharedLocation.tags.find((tag) => {
-          return tag.toLowerCase() === filter.slice(5).toLowerCase();
+          return tag.toLowerCase().replaceAll(" ", "") === filter.slice(5).toLowerCase();
         });
       }
     });
   });
+  if (starting_location.value) {
+    let sorted_locations = filtered_locations.map(location => ({
+      ...location,
+      distance: Math.floor(convertDistance(getDistance(location, starting_location.value!), "mi"))
+,    }))
+    sorted_locations = sorted_locations.filter(location => {
+      return location.distance < 10 && location.name !== starting_location.value!.name
+    });
+    sorted_locations = sortBy(sorted_locations, location => location.distance);
+    return [
+      starting_location.value!,
+      ...sorted_locations
+    ]
+  }
+  return filtered_locations;
 });
 
 watchEffect(() => {

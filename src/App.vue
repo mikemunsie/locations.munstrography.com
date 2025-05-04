@@ -39,11 +39,11 @@ a:hover {
 
 html,
 body {
-  background: #fafafa;
+  background: #000;
+  color: white;
 }
 
 body {
-  color: #333;
   padding: 10px;
 }
 

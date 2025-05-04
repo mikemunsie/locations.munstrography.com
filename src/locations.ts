@@ -110,7 +110,7 @@ const locations: SharedLocation[] = [
     latitude: 32.8348805,
     longitude: -96.8304577,
     instagram_username: Users.srikar,
-    city: "Dallas",
+    city: "Irving",
     security: Security.low,
     tags: [Tags.clean, Tags.day, Tags.night],
   },

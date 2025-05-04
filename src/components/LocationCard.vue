@@ -9,11 +9,32 @@
         <div v-if="location.accessFee" class="distance">
           <strong>${{ location.accessFee }} access fee</strong>
         </div>
-        <div class="distance">{{location.city}}: {{ location.distance }} miles away</div>
+        <div class="distance">
+          <span v-if="starting_location">
+            <span v-if="starting_location.name === location.name">
+              {{location.city}}: {{ location.distance }} miles away
+            </span>
+            <span v-else>
+              {{location.city}}: {{ location.distance }} miles from start
+            </span>
+          </span>
+          <span v-else>
+            {{location.city}}: {{ location.distance }} miles away
+          </span>
+          
+        </div>
       </div>
       <div class="ml-auto flex items-center">
         <button
-          class="share mr-4 rounded"
+          class="action-button mr-2 rounded"
+          :class="{ 'searching-nearby': is_searching_nearby(location) }"
+          v-if="(starting_location && starting_location.name === location.name) || !starting_location"
+          @click="handle_update_starting_location(location)"
+        >
+          <span class="fa fa-solid fa-tower-broadcast"></span> 
+        </button>
+        <button
+          class="action-button mr-4 rounded"
           :class="{ 'has-shared': has_shared }"
           @click="handle_share"
         >
@@ -27,7 +48,7 @@
         </button>
         <button
           @click="getDirections"
-          class="directions bg-blue-500 text-white rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+          class="directions bg-blue-500 text-black rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
           type="button"
         >
           Directions
@@ -66,7 +87,10 @@ const publicPath = import.meta.env.BASE_URL;
 
 const props = defineProps<{
   location: SharedLocationWithDistance;
+  starting_location?: SharedLocationWithDistance;
 }>();
+
+const emit = defineEmits(["update_starting_location"])
 
 const has_shared = ref(false);
 
@@ -95,12 +119,24 @@ function friendlySecurityName(securityName: string) {
   if (securityName === "High") return "Highly Secure. Can't stay long.";
   if (securityName === "Dragon") return "IT'S A F**N DRAGON! 🔥🔥";
 }
+
+function is_searching_nearby(location: SharedLocationWithDistance) {
+  return location.name === props.starting_location?.name;
+}
+
+function handle_update_starting_location(location: SharedLocationWithDistance) {
+  if (props.starting_location?.name === location.name) {
+    emit("update_starting_location", undefined);
+    return;
+  }
+  emit("update_starting_location", location);
+}
 </script>
 
 <style scoped lang="scss">
 .locationCard {
-  background: #fff;
-  border: 1px solid #ccc;
+  background: #000;
+  border: 1px solid #333;
   border-radius: 7.5px;
   padding: 15px;
   margin-bottom: 15px;
@@ -111,8 +147,8 @@ function friendlySecurityName(securityName: string) {
     padding: 0 10px;
     font-weight: bold;
   }
-  .share {
-    border: 1px solid #ccc;
+  .action-button {
+    border: 1px solid #333;
     height: 30px;
     padding: 0 10px;
     display: inline-flex;
@@ -122,6 +158,11 @@ function friendlySecurityName(securityName: string) {
     &.has-shared {
       background: limegreen;
       border: 1px solid limegreen;
+    }
+    &.searching-nearby {
+      background: orangered;
+      color: black;
+      border: 1px solid orangered;
     }
   }
   .tags {
@@ -134,7 +175,7 @@ function friendlySecurityName(securityName: string) {
       color: orangered;
     }
     &.None {
-      color: green;
+      color: lightgreen;
     }
     &.Low {
       color: orange;

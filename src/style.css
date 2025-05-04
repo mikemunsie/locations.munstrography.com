@@ -2,13 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.multiselect {
+    filter: invert(1);
+}
 
-@media (prefers-color-scheme: dark) {
-    html {
-        filter: invert(100%) hue-rotate(180deg);
-    }
+.multiselect__option--highlight, .multiselect__option--highlight::after {
+    background: #732e54 !important;
+}
 
-    .img {
-        filter: invert(100%) hue-rotate(180deg);
-    }
+.multiselect__tag {
+    filter: invert(1);
 }

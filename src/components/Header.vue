@@ -19,9 +19,9 @@
   left: 0;
   right: 0;
   padding: 15px;
-  background: white;
+  background: black;
   z-index: 1000;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #333;
 }
 </style>
 
