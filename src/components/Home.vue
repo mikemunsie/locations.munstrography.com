@@ -159,10 +159,8 @@ const hasInit = ref(false);
 const starting_location = ref<SharedLocationWithDistance>();
 
 function handle_update_starting_location(location) {
+  window.scrollTo(0, 0);
   starting_location.value = location;
-  setTimeout(() => {
-    window.scrollTo(0, 0);
-  }, 100)
 }
 
 function onCopySite() {
