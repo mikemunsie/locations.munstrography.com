@@ -28,7 +28,6 @@
         <button
           class="action-button mr-2 rounded"
           :class="{ 'searching-nearby': is_searching_nearby(location) }"
-          v-if="(starting_location && starting_location.name === location.name) || !starting_location"
           @click="handle_update_starting_location(location)"
         >
           <span class="fa fa-solid fa-tower-broadcast"></span> 
