@@ -96,15 +96,7 @@ const locations: SharedLocation[] = [
     security: Security.low,
     tags: [Tags.clean, Tags.night],
   },
-  {
-    name: "Highway Overpass",
-    latitude: 32.914002,
-    longitude: -96.939288,
-    instagram_username: Users.dallasInBlack,
-    city: "Irving",
-    security: Security.none,
-    tags: [Tags.clean, Tags.day, Tags.night],
-  },
+
   {
     name: "Adriatica Village",
     latitude: 33.196792,
@@ -115,7 +107,7 @@ const locations: SharedLocation[] = [
     tags: [Tags.clean, Tags.day, Tags.night],
   },
   {
-    name: "Irving Highway Overpass",
+    name: "Highway Overpass",
     latitude: 32.912731,
     longitude: -96.9422681,
     instagram_username: Users.dallasInBlack,
