@@ -101,7 +101,7 @@ const locations: SharedLocation[] = [
     latitude: 32.914002,
     longitude: -96.939288,
     instagram_username: Users.dallasInBlack,
-    city: "Plano",
+    city: "Irving",
     security: Security.none,
     tags: [Tags.clean, Tags.day, Tags.night],
   },
