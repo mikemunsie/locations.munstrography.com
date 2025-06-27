@@ -505,8 +505,8 @@ const locations: SharedLocation[] = [
   },
   {
     name: "Cyber Building",
-    latitude: 32.8989919,
-    longitude: -96.9597708,
+    latitude: 32.8990344,
+    longitude: -96.957141,
     instagram_username: Users.munstrography,
     city: "Irving",
     security: Security.none,
